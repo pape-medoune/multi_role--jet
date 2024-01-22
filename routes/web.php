@@ -22,7 +22,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
-        return view('dashboard');
+
+        if (auth()->user()->role == 1) {
+            return view('admin.dashboard');
+        } else {
+            return view('dashboard');
+        }
     })->name('dashboard');
 });
