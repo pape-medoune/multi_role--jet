@@ -25,7 +25,9 @@ Route::middleware([
 
     Route::get('/dashboard', function () {
 
-        if (auth()->user()->role == 1) {
+        if (auth()->user()->role == 0) {
+            return view('superadmin.dashboard');
+        } else if(auth()->user()->role == 1) {
             return view('admin.dashboard');
         } else {
             return view('dashboard');
